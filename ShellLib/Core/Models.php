@@ -46,9 +46,11 @@ class Models
 
     public function GetModelForName($modelName)
     {
-        var_dump(array($modelName, $this->ModelCollections));
-        
         if(!array_key_exists($modelName, $this->ModelCollections)){
+            if(empty($modelName)){
+                $modelName = '[Empty]';
+            }
+
             trigger_error('Missing model for table name ' . $modelName, E_USER_WARNING);
             return null;
         }

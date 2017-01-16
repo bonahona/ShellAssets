@@ -381,7 +381,6 @@ class Core
 
     protected function DebugDieOnRoutingError()
     {
-        // Read debug data from the log
         $dieOnRoutingError = false;
         if($this->ApplicationConfig !== false) {
             if (array_key_exists('Debug', $this->ApplicationConfig)) {
@@ -392,6 +391,34 @@ class Core
         }
 
         return $dieOnRoutingError;
+    }
+
+    protected function CapitalizeControllerName()
+    {
+        $capitalizeControllerName = false;
+        if($this->ApplicationConfig !== false) {
+            if (array_key_exists('Application', $this->ApplicationConfig)) {
+                if (array_key_exists('CapitalizeControllerName', $this->ApplicationConfig['Application'])) {
+                    $capitalizeControllerName = $this->ApplicationConfig['Application']['CapitalizeControllerName'];
+                }
+            }
+        }
+
+        return $capitalizeControllerName;
+    }
+
+    protected function CapitalizeActionName()
+    {
+        $capitalizeActionName = false;
+        if($this->ApplicationConfig !== false) {
+            if (array_key_exists('Application', $this->ApplicationConfig)) {
+                if (array_key_exists('CapitalizeActionName', $this->ApplicationConfig['Application'])) {
+                    $capitalizeActionName = $this->ApplicationConfig['Application']['CapitalizeActionName'];
+                }
+            }
+        }
+
+        return $capitalizeActionName;
     }
 
     // Find the logger classes available in the default shell lib folders
@@ -604,6 +631,7 @@ class Core
     public function GetControllerPath($controllerName, $requestData)
     {
         $usedCore = $this;
+
         $coreControllerPath = $this->CanHandleRoute($controllerName, $requestData);
 
         if($coreControllerPath !== false){
@@ -654,6 +682,10 @@ class Core
     public function CreateHandler($controllerName, $actionName, $requestData)
     {
         // Find the controller to use
+        if($this->CapitalizeControllerName()){
+            $controllerName = ucfirst($controllerName);
+        }
+
         $controllerClassName = $controllerName . 'Controller';
         $controllerPath = $this->GetControllerPath($controllerName, $requestData);
 
@@ -676,6 +708,10 @@ class Core
         }
 
         $controller = new $controllerClassName;
+
+        if($this->CapitalizeActionName()){
+            $actionName = ucfirst($actionName);
+        }
 
         if(!method_exists($controller, $actionName)){
             return array(

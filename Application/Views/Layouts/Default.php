@@ -64,10 +64,8 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar hidden">
-            <?php if(isset($RootDirectories)):?>
-                <?php echo $this->PartialView('Sidebar', array('RootDirectories' => $RootDirectories));?>
-            <?php endif;?>
+        <div class="col-sm-3 col-md-2 sidebar">
+            <?php echo $this->PartialView('Sidebar');?>
         </div>
         <div id="file-container" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <?php if(isset($BreadCrumbs)):?>

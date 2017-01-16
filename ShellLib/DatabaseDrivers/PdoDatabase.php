@@ -122,7 +122,6 @@ class PdoDatabase implements IDatabaseDriver
             'TableColumn' => $row['REFERENCED_COLUMN_NAME']
         );
 
-        var_dump(array($sqlStatement, $params, $result));
         return $result;
     }
 

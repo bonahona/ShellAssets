@@ -51,7 +51,6 @@ class Model
     protected function SetupReferences()
     {
         $this->References = array();
-        var_dump($this->ModelCollection->ModelCache['References']);
         foreach($this->ModelCollection->ModelCache['References'] as $key => $column){
             $fieldName = $this->CreateReferenceName($column['Field']);
             $modelName = $this->Models->GetModelNameForTable($column['TableName']);
@@ -127,8 +126,6 @@ class Model
 
     function __set($propertyName, $value)
     {
-        var_dump(array($propertyName, $value));
-
         if(array_key_exists($propertyName, $this->Properties)){
             $this->Properties[$propertyName] = $value;
             $this->IsDirty = true;

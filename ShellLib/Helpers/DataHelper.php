@@ -141,6 +141,7 @@ class DataHelper implements Iterator, Countable, ArrayAccess
 
                 return $result;
             } else {
+                trigger_error('In DataHalper:DbParse data is missing primary key', E_USER_ERROR);
                 return null;
             }
         }

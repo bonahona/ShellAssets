@@ -46,7 +46,7 @@
                     <li><a class="light-grey" href="/User/Logout">Log out</a></li>
                 <?php endif;?>
             </ul>
-            <form method="get" action="/Home/Search" class="navbar-form navbar-right">
+            <form method="get" action="/Search/Index" class="navbar-form navbar-right">
                 <div class="input-group">
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-search"></span>

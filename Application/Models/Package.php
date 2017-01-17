@@ -13,4 +13,13 @@ class Package extends Model
             return $result;
         }
     }
+
+    public function GetLatestFile()
+    {
+        if(count($this->UploadedFiles) == 0){
+            return null;
+        }
+
+        return $this->UploadedFiles->OrderBy('CreateDate')->First();
+    }
 }

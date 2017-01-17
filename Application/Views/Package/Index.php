@@ -1,10 +1,12 @@
 <h1>Package</h1>
 
-<div class="row">
-    <div class="col-lg-2">
-        <a href="/Package/Create" class="btn btn-md btn-primary">Create new</a>
+<?php if($this->IsLoggedIn()):?>
+    <div class="row">
+        <div class="col-lg-2">
+            <a href="/Package/Create" class="btn btn-md btn-primary">Create new</a>
+        </div>
     </div>
-</div>
+<?php endif;?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -12,7 +14,8 @@
             <thead>
                 <tr>
                     <th class="col-lg-2">Name</th>
-                    <th class="col-lg-4">Description</th>
+                    <th class="col-lg-3">Description</th>
+                    <th class="col-lg-1">&nbsp;</th>
                     <th class="col-lg-2">Date</th>
                     <th class="col-lg-2">Uploaded by</th>
                     <th class="col-lg-2">&nbsp;</th>
@@ -23,6 +26,7 @@
                     <tr>
                         <td><a href="<?php echo '/Package/Details/' . $package->Id;?>"><?php echo $package->Name;?></a></td>
                         <td><?php echo $package->GetShortDescription(50);?></td>
+                        <td><a href="<?php echo '/Package/File/' . $package->Name;?>"><span class="glyphicon glyphicon-download-alt"></span></a></td>
                         <td><?php echo $package->CreateDate;?></td>
                         <td><?php echo $package->UserName;?></td>
                         <td>
